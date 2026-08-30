@@ -1,0 +1,20 @@
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      glob: "**/*.{js,jsx,ts,tsx}"
+      exclude: |
+        (?:^|\/)node_modules\/
+        (?:^|\/)dist\/
+        (?:^|\/)build\/
+        (?:^|\/)\..+
+        (?:^|\/).next\/
+        (?:^|\/)\.(expo|react-native)\/
+        (?:^|\/).pnpm\/
+      run: npx eslint {staged_files} --max-warnings 0
+      stage_fixed: true
+
+commit-msg:
+  commands:
+    commitlint:
+      run: npx commitlint --edit $1
